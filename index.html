@@ -2,237 +2,145 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Home</title>
-</head>
-<body>
-<script>
-    document.addEventListener('gesturestart', function (event) {
-        event.preventDefault();
-    });
-
-    document.addEventListener('wheel', function (event) {
-        if (event.ctrlKey) {
-            event.preventDefault();
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Phone UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-    }, { passive: false });
-</script>
-  <style>
-  .tab-item {
-    -webkit-tap-highlight-color: transparent;
-}
-.tab-item:focus {
-    outline: none;
-}
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      background: url('https://i.imgur.com/RHSdk0h.png') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 50px;
-    }
-    /* Hồ sơ người dùng */
-    .profile {
-      display: flex;
-      align-items: center;
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 350px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 15px;
-    }
-    .profile img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-    .profile p {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: black;
-    }
-    /* Mời người mới */
-    .invite-box {
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .invite-box .left {
-      display: flex;
-      align-items: center;
-    }
-    .invite-box img {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-    }
-    .invite-box p {
-      font-size: 1rem;
-      color: black;
-      font-weight: bold;
-    }
-    .invite-box .right {
-      background: #f3c27d;
-      padding: 8px 15px;
-      border-radius: 15px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent; /* Chặn hiệu ứng nhấn */
-}
 
-.grid-item, .policy-item {
-    -webkit-tap-highlight-color: transparent; /* Chặn hiệu ứng nhấn cho các nút */
-}
-
-.grid-item:focus, .policy-item:focus {
-    outline: none; /* Chặn viền focus khi nhấn */
-}
-    /* Grid menu */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      width: 90%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 15px;
-      border-radius: 15px;
-    }
-    .grid-item {
-      display: flex;
-      align-items: center;
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-    .grid-item img {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-    }
-    .grid-item p {
-      font-size: 1rem;
-      color: black;
-      font-weight: bold;
-    }
-/* Chính sách (Moved Below Grid Menu) */
-        .policy-container {
+        body {
+            background: url('https://i.imgur.com/dPzdyqr.png') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
-            justify-content: space-between;
-            width: 90%;
-            max-width: 400px;
-        }
-        .policy-item {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 10px;
-            border-radius: 15px;
-            width: 48%;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: black;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding-top: 150px;
+            overflow: hidden;
         }
-        .policy-item img {
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
+
+        .container {
+            width: 260px;
+            height: 600px;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 5px;
         }
-.policy-container {
-    margin-top: 20px; /* Tăng giá trị này nếu muốn xuống thấp hơn */
-}
-  </style>
+
+        .screen {
+            width: 250px;
+            height: 490px;
+            flex: none;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-snap-align: center;
+            padding: 15px;
+            border: 1px solid #ffb599;
+            text-align: center;
+            position: relative;
+            background: url('https://i.imgur.com/N0OCl3U.jpeg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .header {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            width: auto;
+            position: absolute;
+            top: 10px;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .image {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .button:hover {
+            background-color: #c76f49;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Hồ sơ người dùng -->
-  <div class="profile">
-    <img src="https://i.imgur.com/Gk4Qdeu.jpeg" alt="Avatar">
-    <p>Powered By Turbo Lite <3 </p>
-  </div>
-
-  <!-- Mời người mới -->
-  <div class="invite-box">
-    <div class="left">
-      <img src="https://i.imgur.com/1z0zeya.png" alt="Icon">
-      <p>Kim Cương</p>
-    </div>
-    <div class="right"> 999.999.999.999 </div>
-  </div>
-
-  <!-- Grid menu -->
-  <div class="grid-container">
-    <div class="grid-item" onclick="openURL('https://youtube.com/@turboxlite')">
-      <img src="https://img.utdstc.com/icon/367/c07/367c07a62d78fa7d0253ec501c789b8251ac8fb62e2d0185ed38c9417af1bed0:200" alt="Icon">
-      <p>YouTube</p>
-    </div>
-    <div class="grid-item" onclick="openURL('https://www.tiktok.com/@game.turbografx')">
-      <img src="https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/tiktok/webapp/main/react-v18/webapp-seo-mobile/0c398b018482cebeb833.png" alt="Icon">
-      <p>TikTok</p>
-    </div>
-    <div class="grid-item" onclick="openURL('https://discord.gg/PXBcWMEgNP')">
-      <img src="https://img.utdstc.com/icon/5ed/010/5ed01047ff16ea45ec92a448cd98f0a807eeca466da7c176a1b2b5f2ca8deb66:200" alt="Icon">
-      <p>Discord</p>
-    </div>
-    <div class="grid-item" onclick="openURL('https://turbolite.xyz/')">
-      <img src="https://cdn-icons-png.flaticon.com/128/892/892634.png" alt="Icon">
-      <p>Website</p>
-    </div>
-  </div>
-<!-- Chính sách (Đã được di chuyển xuống dưới) -->
-    <div class="policy-container">
-        <div class="policy-item" onclick="openURL('https://now.gg/terms-and-privacy.html#terms')">
-            <img src="https://cdn-icons-png.flaticon.com/128/1041/1041916.png" alt="Icon">
-            Điều Khoản
-        </div>
-        <div class="policy-item" onclick="openURL('https://now.gg/copyright-dispute-policy.html')">
-            <img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" alt="Icon">
-            Chính Sách
-        </div>
-    </div>
-  <script>
-    function openURL(url) {
-      window.open(url, "_blank");
-    }
-  </script>
-<script>
-    document.addEventListener('contextmenu', function(event) {
-        event.preventDefault(); // Chặn chuột phải
-    });
-
-    document.addEventListener('copy', function(event) {
-        event.preventDefault(); // Chặn copy
-        alert("");
-    });
+    <div class="container">
+        
+        <!-- Màn hình 1 -->
+        <div class="screen">
+            <div class="header">Thiết Bị Tải Tất Cả Game</div>
+            <div class="content">
+                <div class="image">
+                    <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.aptoide.partners.nowgg.store%252Ficon%252Faptoide.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Aptoide">
+                </div>
+    <script>
+        let encodedData = `PGRpdiBjbGFzcz0iYnV0dG9uIiBvbmNsaWNrPSJvcGVuSW5OZXdUYWIoJ2h0dHBzOi8vd2VicHJv
+eHkucHJveHlzaGFyZS5jb20vcmVxdWVzdD9hcmVhPVVTJnU9aHR0cHM6Ly9ub3cuZ2cvYXBwcy9h
+cHRvaWRlLzU4NzQvYXB0b2lkZS5odG1sJykiPg==`; 
+    let decodedData = atob(encodedData);
+document.write(decodedData);
 </script>
+                    Vào Thiết Bị 
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openInNewTab(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+
 </body>
 </html>
