@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Phone UI</title>
+    <meta name="theme-color" content="#ffffff">
+    <title>Pro</title>
     <style>
         * {
             margin: 0;
@@ -12,20 +13,74 @@
             font-family: Arial, sans-serif;
         }
 
+        /* Màn hình nền */
         body {
-            background: url('https://i.imgur.com/dPzdyqr.png') no-repeat center center fixed;
+            background: url('https://i.imgur.com/8dJbCda.jpeg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
-            padding-top: 150px;
             overflow: hidden;
         }
 
+        /* Hiệu ứng loader */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: absolute;
+            width: 100%;
+            background: #fff;
+            z-index: 10;
+        }
+
+        .loader {
+            width: 50px;
+            aspect-ratio: 1;
+            display: grid;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-right-color: #ff69b4;
+            animation: l15 1s infinite linear;
+        }
+
+        .loader::before,
+        .loader::after {    
+            content: "";
+            grid-area: 1/1;
+            margin: 2px;
+            border: inherit;
+            border-radius: 50%;
+            animation: l15 2s infinite;
+        }
+
+        .loader::after {
+            margin: 8px;
+            animation-duration: 3s;
+        }
+
+        @keyframes l15 { 
+            100% { transform: rotate(1turn) }
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        /* Nội dung chính (ẩn ban đầu) */
+        .main-content {
+            display: none;
+        }
+
         .container {
-            width: 260px;
-            height: 600px;
+            width: 381px;
+            height: 500px;
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -46,7 +101,7 @@
             border: 1px solid #ffb599;
             text-align: center;
             position: relative;
-            background: url('https://i.imgur.com/N0OCl3U.jpeg') no-repeat center center;
+            background: url('https://i.imgur.com/7nxIFt9.jpeg') no-repeat center center;
             background-size: cover;
         }
 
@@ -73,8 +128,8 @@
         }
 
         .image {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background-color: #fff;
             border-radius: 10px;
             overflow: hidden;
@@ -103,44 +158,127 @@
         }
 
         .button:hover {
-            background-color: #c76f49;
+            background-color: #FFC0CB;
         }
 
         .container::-webkit-scrollbar {
             display: none;
         }
+        
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Màn hình 1 -->
-        <div class="screen">
-            <div class="header">Thiết Bị Tải Tất Cả Game</div>
-            <div class="content">
-                <div class="image">
-                    <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.aptoide.partners.nowgg.store%252Ficon%252Faptoide.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Aptoide">
-                </div>
-    <script>
-        let encodedData = `PGRpdiBjbGFzcz0iYnV0dG9uIiBvbmNsaWNrPSJvcGVuSW5OZXdUYWIoJ2h0dHBzOi8vd2VicHJv
-eHkucHJveHlzaGFyZS5jb20vcmVxdWVzdD9hcmVhPVVTJnU9aHR0cHM6Ly9ub3cuZ2cvYXBwcy9h
-cHRvaWRlLzU4NzQvYXB0b2lkZS5odG1sJykiPg==`; 
-    let decodedData = atob(encodedData);
-document.write(decodedData);
-</script>
-                    Vào Thiết Bị 
-                </div>
-            </div>
-        </div>
-
+    <!-- Màn hình loading -->
+    <div class="loading-container">
+        <div class="loader"></div>
+        <div class="loading-text">Đang tải data...</div>
     </div>
 
+    <!-- Nội dung chính -->
+    <div class="main-content">
+        <div class="container">
+            
+            <!-- Màn hình 1 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Roblox</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn6.aptoide.com/imgs/0/c/2/0c215277a5b9286286656f65318057f8_icon.png?w=128" alt="Genshin Impact">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://mathstutor.life/apps/roblox-corporation/5349/roblox.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 2 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Launcher</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.uncube.launcher3%252Ficon%252Fnow.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://now.gg/apps/cognosphere-pte-ltd-/7074/genshin-impact.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Discord</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next/image%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.discord%252Ficon%252Fdiscord-talk-chat-hang-out.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+<!-- Màn hình 11 -->
+<div class="screen">
+    <div class="header">Thiết Bị Pro Ameow Us</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.innersloth.spacemafia%252Ficon%252Famong-us.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Ameow Us">
+        </div>
+        <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://now.gg/apps/innersloth-llc/4047/among-us.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+
+<!-- Màn hình 17 -->
+<div class="screen">
+    <div class="header">Thiết Bị Pro PUBG Mobile</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.tencent.ig%252Ficon%252Fpubg-mobile-resistance.png%26w%3D256%26q%3D80&w=1440&q=70" alt="PUBG Mobile">
+        </div>
+        <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://now.gg/apps/proxima-beta/2609/pubg-mobile-resistance.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
+<!-- Màn hình 16 -->
+<div class="screen">
+    <div class="header">Thiết Bị Pro Free Fire</div>
+    <div class="content">
+        <div class="image">
+            <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.dts.freefireth%252Ficon%252Ffree-fire.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Free Fire">
+        </div>
+        <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?area=GB&u=https://now.gg/apps/garena-international-i/1398/free-fire.html', '_blank')">
+            Vào Chơi 
+        </div>
+    </div>
+</div>
     <script>
-        function openInNewTab(url) {
-            window.open(url, '_blank');
-        }
+        // Chờ 2 giây, sau đó ẩn loader và hiển thị nội dung chính
+        setTimeout(() => {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        }, 2000);
     </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Kiểm tra nếu đã từng hiển thị loading trong phiên này
+        if (sessionStorage.getItem("loaded")) {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        } else {
+            // Nếu chưa hiển thị, hiển thị loading trong 2 giây rồi ẩn đi
+            setTimeout(() => {
+                document.querySelector(".loading-container").style.display = "none";
+                document.querySelector(".main-content").style.display = "block";
+                // Đánh dấu là đã load xong trong phiên hiện tại
+                sessionStorage.setItem("loaded", "true");
+            }, 2000);
+        }
+    });
+</script>
+</script>
 </body>
 </html>
