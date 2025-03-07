@@ -1,209 +1,494 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff"> <!-- Đổi màu thanh trạng thái thành trắng -->
-  <title>Turbo Lite - Get Key</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      flex-direction: column;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    .key-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        /* Màn hình nền */
+        body {
+            background: url('https://i.imgur.com/8dJbCda.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    .key-box {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      color: black;
-      width: 250px;
-      position: relative;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      border: 2px solid black;
-    }
+        /* Hiệu ứng loader */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: absolute;
+            width: 100%;
+            background: #fff;
+            z-index: 10;
+        }
 
-    .key-box h2 {
-      font-weight: bold;
-    }
+        .loader {
+            width: 50px;
+            aspect-ratio: 1;
+            display: grid;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-right-color: #ff69b4;
+            animation: l15 1s infinite linear;
+        }
 
-    .key-box input {
-      padding: 10px;
-      border: 1px solid #000;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 1px;
-      text-align: center;
-    }
+        .loader::before,
+        .loader::after {    
+            content: "";
+            grid-area: 1/1;
+            margin: 2px;
+            border: inherit;
+            border-radius: 50%;
+            animation: l15 2s infinite;
+        }
 
-    .key-box button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      background-color: black;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+        .loader::after {
+            margin: 8px;
+            animation-duration: 3s;
+        }
 
-    .key-box button:hover {
-      background-color: gray;
-    }
+        @keyframes l15 { 
+            100% { transform: rotate(1turn) }
+        }
 
-    .message {
-      margin-top: 15px;
-      font-weight: bold;
-    }
+        .loading-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+        }
 
-  </style>
+        /* Nội dung chính (ẩn ban đầu) */
+        .main-content {
+            display: none;
+        }
+
+        .container {
+            width: 381px;
+            height: 500px;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 5px;
+        }
+
+        .screen {
+            width: 250px;
+            height: 490px;
+            flex: none;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-snap-align: center;
+            padding: 15px;
+            border: 1px solid #ffb599;
+            text-align: center;
+            position: relative;
+            background: url('https://i.imgur.com/7nxIFt9.jpeg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .header {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            width: auto;
+            position: absolute;
+            top: 10px;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .image {
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .button:hover {
+            background-color: #FFC0CB;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+        
+    </style>
 </head>
 <body>
 
-<div class="key-container" id="keyContainer">
-  <div class="key-box">
-    <h2>Turbo Lite</h2>
-    <h3>Bạn Cần Lấy Key Để Chơiii</h3>
-    <h4>1 Key + 30h = Vô Hạn Chơi</h4>
-    <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
-    <br>
-    <div style="display: flex; justify-content: center; gap: 7px; margin-bottom: 5px;">
-      <button onclick="copyKeyLink()">Lấy Key</button>
-      <button onclick="checkKey()">Xác Nhận</button>
+    <!-- Màn hình loading -->
+    <div class="loading-container">
+        <div class="loader"></div>
+        <div class="loading-text">Đang tải data...</div>
     </div>
-    <p id="message" class="message"></p>
-    <button onclick="openNewTab()" style="display: block; margin: auto;">Xem Hướng Dẫn Cách Lấy Key</button>
-  </div>
-</div>
+
+    <!-- Nội dung chính -->
+    <div class="main-content">
+        <div class="container">
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Aptoide</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.aptoide.partners.nowgg.store%252Ficon%252Faptoide.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/aptoide/5874/aptoide.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Màn hình 1 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Roblox</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn6.aptoide.com/imgs/0/c/2/0c215277a5b9286286656f65318057f8_icon.png?w=128" alt="Genshin Impact">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://mathstutor.life/apps/roblox-corporation/5349/roblox.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 2 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Launcher</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.uncube.launcher3%252Ficon%252Fnow.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/cognosphere-pte-ltd-/7074/genshin-impact.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Discord</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next/image%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.discord%252Ficon%252Fdiscord-talk-chat-hang-out.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Meopopy</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.MOBGames.PoppyMobileChap1%252Ficon%252Fpoppy-playtime.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/mob-games-studio/1293/poppy-playtime.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Free Fire</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.dts.freefireth%252Ficon%252Ffree-fire.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/garena-international-i/1398/free-fire.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro TikTok Shop</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.zhiliaoapp.musically%252Ficon%252Ftiktok.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/tiktok/4478/tiktok.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Solar Smash</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.paradyme.solarsmash%252Ficon%252Fsolar-smash.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/paradyme-games/2629/solar-smash.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro World Box</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.mkarpenko.worldbox%252Ficon%252Fworldbox-sandbox-god-simulator.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/maxim-karpenko/1658/worldbox.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Pubg Mobile</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.tencent.ig%252Ficon%252Fpubg-mobile-resistance.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/proxima-beta/2609/pubg-mobile-resistance.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+         
+                     <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Tap Titan</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.gamehivecorp.taptitans2%252Ficon%252Ftap-titans-2.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/game-hive/8005/tap-titans-2.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+         
+                     <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Geometry</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.robtopx.geometryjump%252Ficon%252Fgeometry-dash.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/robtop-games/1400/geometry-dash.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+         
+                     <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Honkai Star</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.HoYoverse.hkrpgoversea%252Ficon%252Fhonkai-star-rail.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/cognosphere-pte-ltd/1591/honkai-star-rail.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+         
+                     <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Punishing</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.kurogame.gplay.punishing.grayraven.en%252Ficon%252Fgray-raven.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/kuro-technology/9609/gray-raven.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+         
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Echocalypse</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.yoozoo.jgame.us%252Ficon%252Fechocalypse-scarlet-covenant.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/yoozoo-singapore-pte-ltd/7042/echocalypse-scarlet-covenant.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Bà Granny</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.dvloper.granny%252Ficon%252Fgranny.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/dvloper/4807/granny.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Bà Già Ma</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.hgamesart.creepyscreamhorror%252Ficon%252Fcreepy-granny-scream.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/inlogic/2086/creepy-granny-scream.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Gacha Fife</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fair.com.lunime.gachalife2%252Ficon%252Fgacha-life-2.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/lunime/5691/gacha-life-2.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro YouTube</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.google.android.youtube%252Ficon%252Fyoutube.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/google-llc/1395/youtube.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro GTA 6</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F8830%252Ficon%252Freal-gangster-crime.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/naxeex-action-rpg-games/8830/real-gangster-crime.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Meo Lazy Tom</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.outfit7.mytalkingangela2%252Ficon%252Fmy-talking-angela-2.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/outfit7-limited/7380/my-talking-angela-2.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Meo Và Bạn</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252Fcom.outfit7.mytalkingtomfriends%252Ficon%252Fmy-talking-tom-friends.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.lumiproxy.com/request?area=GB&u=https://now.gg/apps/outfit-limited/5645/my-talking-tom-friends.html', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+
+    <script>
+        // Chờ 2 giây, sau đó ẩn loader và hiển thị nội dung chính
+        setTimeout(() => {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        }, 2000);
+    </script>
 
 <script>
-function openNewTab() {
-    window.open('https://drive.google.com/file/d/1M6bSdHBRc97W1IEuPeN-B2GYGbdW2Z9c/view?usp=drivesdk', '_blank');
-}
-
-const validKeys = ["KEY_ISOlZ487", "KEY_RIVQK477", "Meowx"]; 
-const keyExpireTime = 30 * 60 * 60 * 1000; 
-const redirectURL = "https://meolazy.github.io/ProZ/";
-const keyLink = "https://ez4short.com/GetKey"; 
-
-function copyKeyLink() {
-    navigator.clipboard.writeText(keyLink).then(() => {
-      document.getElementById("message").style.color = "green";
-      document.getElementById("message").textContent = "> https://ez4short.com/GetKey < Bạn Copy Link Lấy Key, Bạn Vào Google Và Dán Để Lấy Key Nha";
-    }).catch(err => {
-      document.getElementById("message").style.color = "red";
-      document.getElementById("message").textContent = "https://ez4short.com/GetKey";
+    document.addEventListener("DOMContentLoaded", () => {
+        // Kiểm tra nếu đã từng hiển thị loading trong phiên này
+        if (sessionStorage.getItem("loaded")) {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        } else {
+            // Nếu chưa hiển thị, hiển thị loading trong 2 giây rồi ẩn đi
+            setTimeout(() => {
+                document.querySelector(".loading-container").style.display = "none";
+                document.querySelector(".main-content").style.display = "block";
+                // Đánh dấu là đã load xong trong phiên hiện tại
+                sessionStorage.setItem("loaded", "true");
+            }, 2000);
+        }
     });
-}
-
-function checkKey() {
-    const userKey = document.getElementById("userKey").value;
-    const message = document.getElementById("message");
-
-    message.style.color = "blue";
-    message.textContent = "Chờ Xíuu";
-
-    setTimeout(() => {
-      if (validKeys.includes(userKey)) {
-        message.style.color = "green";
-        message.textContent = "Ok Ok Key Đúng";
-        localStorage.setItem("storedKey", userKey);
-        localStorage.setItem("keyTimestamp", Date.now().toString());
-
-        sendWebhook(userKey); // Gửi webhook khi nhập key đúng
-
-        setTimeout(() => {
-          window.location.href = redirectURL;
-        }, 1500);
-      } else {
-        message.style.color = "red";
-        message.textContent = "Key Saiii 😡";
-      }
-    }, 1000);
-}
-
-function checkStoredKey() {
-    const storedKey = localStorage.getItem("storedKey");
-    const keyTimestamp = localStorage.getItem("keyTimestamp");
-
-    if (storedKey && validKeys.includes(storedKey)) {
-      if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
-        document.getElementById("message").textContent = "Welcome Back!";
-        setTimeout(() => {
-          window.location.href = redirectURL;
-        }, 1000);
-      }
-    }
-}
-
-async function sendWebhook(usedKey = "Welcome Back!") {
-    const webhookURL = "https://discord.com/api/webhooks/1336972656007843904/DO7_c-0Fhz1Hs7rYfqLeFJVu8pZVPzmDaDnruSyc-ZC_7xRgaKYRUmexTyAbwdbGugmI";
-
-    // Lấy thông tin thiết bị
-    const userAgent = navigator.userAgent;
-    let deviceType = "PC";
-    if (/Mobi|Android/i.test(userAgent)) {
-        deviceType = "Mobile";
-    } else if (/Tablet|iPad/i.test(userAgent)) {
-        deviceType = "Tablet";
-    }
-
-    // Nếu là Android, lấy phiên bản
-    let androidVersion = "Không phải Android";
-    const match = userAgent.match(/Android\s([\d.]+)/);
-    if (match) {
-        androidVersion = `Android ${match[1]}`;
-    }
-
-    // Gửi webhook khi người dùng vào web
-    const embedMessage = {
-        embeds: [{
-            title: "Webhook UgPhone",
-            color: 3447003,
-            fields: [
-                { name: "Key:", value: `\`${usedKey}\``, inline: false },
-                { name: "Thiết Bị:", value: `\`${deviceType}\``, inline: true },
-                { name: "Android:", value: `\`${androidVersion}\``, inline: true }
-                
-            ],
-            footer: { text: new Date().toLocaleString() }
-        }]
-    };
-
-    fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(embedMessage)
-    })
-    .then(response => console.log("Webhook sent!", response))
-    .catch(error => console.error("Lỗi gửi webhook:", error));
-}
-
-// Gửi webhook khi người dùng vào web
-window.onload = () => sendWebhook();
-
-checkStoredKey();
 </script>
-
+</script>
 </body>
 </html>
