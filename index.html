@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông Báo Bảo Trì</title>
+    <meta name="theme-color" content="#ffffff">
+    <title>Pro</title>
     <style>
         * {
             margin: 0;
@@ -11,35 +12,289 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
+        /* Màn hình nền */
         body {
+            background: url('https://i.imgur.com/8dJbCda.jpeg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f8d7da;
-            color: #721c24;
-            text-align: center;
+            overflow: hidden;
         }
+
+        /* Hiệu ứng loader */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: absolute;
+            width: 100%;
+            background: #fff;
+            z-index: 10;
+        }
+
+        .loader {
+            width: 50px;
+            aspect-ratio: 1;
+            display: grid;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-right-color: #ff69b4;
+            animation: l15 1s infinite linear;
+        }
+
+        .loader::before,
+        .loader::after {    
+            content: "";
+            grid-area: 1/1;
+            margin: 2px;
+            border: inherit;
+            border-radius: 50%;
+            animation: l15 2s infinite;
+        }
+
+        .loader::after {
+            margin: 8px;
+            animation-duration: 3s;
+        }
+
+        @keyframes l15 { 
+            100% { transform: rotate(1turn) }
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        /* Nội dung chính (ẩn ban đầu) */
+        .main-content {
+            display: none;
+        }
+
         .container {
-            background: white;
-            padding: 20px;
+            width: 381px;
+            height: 500px;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 10px;
+            padding: 5px;
+        }
+
+        .screen {
+            width: 250px;
+            height: 490px;
+            flex: none;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #f5c6cb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-snap-align: center;
+            padding: 15px;
+            border: 1px solid #ffb599;
+            text-align: center;
+            position: relative;
+            background: url('https://i.imgur.com/7nxIFt9.jpeg') no-repeat center center;
+            background-size: cover;
         }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+
+        .header {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            width: auto;
+            position: absolute;
+            top: 10px;
         }
-        p {
-            font-size: 18px;
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
+
+        .image {
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button {
+            background-color: #e48c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .button:hover {
+            background-color: #FFC0CB;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Thiết Bị Bảo Trì</h1>
-        <p>Bạn Dùng Thiết Bị VPN Để Chơi Nha ♥️</p>
+
+    <!-- Màn hình loading -->
+    <div class="loading-container">
+        <div class="loader"></div>
+        <div class="loading-text">Đang tải data...</div>
     </div>
+
+    <!-- Nội dung chính -->
+    <div class="main-content">
+        <div class="container">
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Shadow 3</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/apps-content/8861/icon/shadow-fight-3.png" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFR4QEBJUQ0NNSlQIExofFAxWHRIcEw9WSFUTDxYX', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Màn hình 1 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Terrarum</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F9059%252Ficon%252Ftales-of-terrarum.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Genshin Impact">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUHhceGA8JFBUSGFYIFA4XVEJLTkJUDxoXHghWFB1WDx4JCRoJDhZVEw8WFw==', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 2 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Zombie Island</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F8888%252Ficon%252Fzombieland-doomsday-survival.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUEQ4eHR4VHFYcGhYeCFRDQ0NDVAEUFhkSHhcaFR9WHxQUFggfGgJWCA4JDRINGhdVEw8WFw==', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+
+            <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Chaser</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/apps-content/10417/icon/chasers.png" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFxIdDhcIHlRKS09KTFQYExoIHgkIVRMPFhc=', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro Scarlett Girl</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/apps-content/9887/icon/scarlet-girls.png" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUGQ4JCA8cGhYeVEJDQ0xUCBgaCRceD1YcEgkXCFUTDxYX', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+            
+                        <!-- Màn hình 3 -->
+            <div class="screen">
+                <div class="header">Thiết Bị Pro The Walking Dead</div>
+                <div class="content">
+                    <div class="image">
+                        <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F10512%252Ficon%252Fthe-walking-dead-survivors.png%26w%3D256%26q%3D80&w=1440&q=70" alt="App">
+                    </div>
+                    <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUHBoXGgMCVgsXGgJWDx4YExUUFxQcAlYXEhYSDx4fVEpLTkpJVA8THlYMGhcQEhUcVh8eGh9WCA4JDRINFAkIVRMPFhc=', '_blank')">
+                        Vào Chơi 
+                    </div>
+                </div>
+            </div>
+               <!-- Màn hình 4 -->
+    <div class="screen">
+        <div class="header">Thiết Bị Pro Chronicle Isekai</div>
+        <div class="content">
+            <div class="image">
+                <img src="https://cdn.now.gg/assets-opt/_next/image?url=https%3A%2F%2Fcdn.now.gg%2Fassets-opt%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fcdn.now.gg%252Fapps-content%252F8796%252Ficon%252Fmagic-chronicle-isekai-rpg.png%26w%3D256%26q%3D80&w=1440&q=70" alt="Free Fire">
+            </div>
+            <div class="button" onclick="window.open('https://webproxy.proxyshare.com/request?p=GgkeGkYuKF0ORhMPDwsIQVRUFRQMVRwcVBoLCwhUFhocEhhWHBoWHlRDTEJNVBYaHBIYVhgTCRQVEhgXHlYSCB4QGhJWCQscVRMPFhc=', '_blank')">
+                Vào Chơi 
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Chờ 2 giây, sau đó ẩn loader và hiển thị nội dung chính
+        setTimeout(() => {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        }, 1000);
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Kiểm tra nếu đã từng hiển thị loading trong phiên này
+        if (sessionStorage.getItem("loaded")) {
+            document.querySelector(".loading-container").style.display = "none";
+            document.querySelector(".main-content").style.display = "block";
+        } else {
+            // Nếu chưa hiển thị, hiển thị loading trong 2 giây rồi ẩn đi
+            setTimeout(() => {
+                document.querySelector(".loading-container").style.display = "none";
+                document.querySelector(".main-content").style.display = "block";
+                // Đánh dấu là đã load xong trong phiên hiện tại
+                sessionStorage.setItem("loaded", "true");
+            }, 1000);
+        }
+    });
+</script>
+</script>
 </body>
 </html>
