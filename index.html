@@ -1,11 +1,9 @@
-v1
+v2
 <! physics ><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Cloud Phone UI Pro</title><style> /* Hình Hello Kitty */ .hello-kitty { position: absolute; top: -130px; right: -10px; width: 80px; height: auto; transition: transform 0.3s ease; } .hello-anime { position: absolute; top: -75px; right: 211px; width: 80px; height: auto; transition: transform 0.3s ease; } /* Màn hình loading */ #loadingScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 9999; } .notification-box { background: white; padding: 20px; border-radius: 10px; text-align: center; color: black; width: 300px; position: relative; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); border: 2px solid black; } .notification-box h2 { font-weight: bold; font-size: 18px; margin-top: -10px; /* Đẩy chữ lên một chút */ margin-bottom: 10px; /* Tạo khoảng cách dưới */}.notification-box h3,.notification-box h4 { margin-bottom: 8px; /* Tạo khoảng cách giữa các dòng */} .button-group { display: flex; justify-content: center; gap: 10px; margin-top: 15px; } .notification-box button { padding: 10px 15px; border: none; border-radius: 5px; background-color: black; color: white; font-weight: bold; cursor: pointer; width: 80px; } .notification-box button:hover { background-color: gray; } /* Ẩn nội dung chính trước khi thông báo bị tắt */ #mainContent { display: none; } * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }body { background: url('https://i.imgur.com/8dJbCda.jpeg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; height: 90vh; overflow: hidden; .container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 40px; padding: 15px 70px 15px 60px; /* top right bottom left */ overflow-y: visible;} .screen {
   border: 1px solid white;
-  width: 300px;              /* mặc định */
-  height: 540px;             /* mặc định */
-  max-width: 90vw;           /* không vượt quá 90% chiều rộng màn hình */
-  max-height: 90vh;          /* không vượt quá 90% chiều cao màn hình */
-  flex: none;
+  aspect-ratio: 300 / 540;     /* Giữ đúng tỉ lệ */
+  width: min(300px, 90vw);     /* Lấy nhỏ hơn giữa 300px và 90% chiều rộng màn hình */
+  height: auto;                /* Tự tính theo aspect-ratio */
   border-radius: 14px;
   display: flex;
   flex-direction: column;
