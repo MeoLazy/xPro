@@ -75,7 +75,7 @@ iframe {
     <div class="loading-overlay" id="loading">
         <div class="loading-box">
             <img class="loading-image" src="https://meolazy.github.io/xPro/loading.png" alt="Loading">
-            <p id="loading-text">Đang khởi động, chờ xíu nha... 1</p>
+            <p id="loading-text">Đang khởi động, chờ xíu nha... 3</p>
         </div>
     </div>
 </div>
@@ -119,7 +119,7 @@ function hidePopupAfterDelay() {
     setTimeout(() => {
         loading.classList.add("loading-hidden");
         stopTextLoop();
-    }, 5000);
+    }, 500);
 }
 
 // --- SAVE URL thật ---
@@ -127,8 +127,8 @@ iframe.dataset.realUrl = iframe.src;
 
 // --- Reload settings ---
 let reloadCount = 0;
-const maxReloads = 2;
-const reloadDelay = 3000;
+const maxReloads = 4;
+const reloadDelay = 2000;
 
 function reloadFrame() {
     showPopup();  // ❗ Popup GIỮ NGUYÊN
